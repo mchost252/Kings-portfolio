@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ehiabhi Kingdom | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#6E44FF',secondary:'#00E5FF'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #0A0A0A;
+            color: #ffffff;
+            cursor: none;
+        }
+        
+        .syncopate {
+            font-family: 'Syncopate', sans-serif;
+        }
+        
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #6E44FF;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+            mix-blend-mode: difference;
+        }
+        
+        .cursor-trail {
+            width: 6px;
+            height: 6px;
+            background-color: rgba(110, 68, 255, 0.5);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.5s;
+            z-index: 9998;
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 10px rgba(110, 68, 255, 0.7), 0 0 20px rgba(110, 68, 255, 0.5);
+            animation: glow 3s infinite alternate;
+        }
+        
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 10px rgba(110, 68, 255, 0.7), 0 0 20px rgba(110, 68, 255, 0.5);
+            }
+            100% {
+                text-shadow: 0 0 15px rgba(110, 68, 255, 0.9), 0 0 30px rgba(110, 68, 255, 0.7), 0 0 40px rgba(110, 68, 255, 0.5);
+            }
+        }
+        
+        .grid-background {
+            background-image: linear-gradient(rgba(20, 20, 20, 0.8) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(20, 20, 20, 0.8) 1px, transparent 1px);
+            background-size: 30px 30px;
+            background-position: center center;
+        }
+        
+        .hero-bg {
+            background: radial-gradient(circle at 50% 50%, #1A1A1A 0%, #0A0A0A 100%);
+        }
+        
+        .gradient-border {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #6E44FF, #00E5FF, #FF44EC);
+            z-index: -1;
+            border-radius: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gradient-border:hover::before {
+            opacity: 1;
+        }
+        
+        .neon-input {
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid rgba(110, 68, 255, 0.3);
+            box-shadow: 0 0 10px rgba(110, 68, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .neon-input:focus {
+            border-color: #6E44FF;
+            box-shadow: 0 0 15px rgba(110, 68, 255, 0.5);
+        }
+        
+        .skill-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #6E44FF, #00E5FF);
+            border-radius: 2px;
+            position: relative;
+        }
+        
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 8px;
+            height: 100%;
+            background: #ffffff;
+            border-radius: 2px;
+        }
+        
+        .category-filter {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-filter::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6E44FF, #00E5FF);
+            transition: width 0.3s ease;
+        }
+        
+        .category-filter.active::after,
+        .category-filter:hover::after {
+            width: 100%;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #6E44FF;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(110, 68, 255, 0.2), rgba(0, 229, 255, 0.2));
+            filter: blur(20px);
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            50% {
+                transform: translate(20px, 20px) rotate(180deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+        
+        .reveal-text {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .reveal-text span {
+            display: inline-block;
+            transform: translateY(100%);
+            opacity: 0;
+            animation: revealText 0.8s forwards;
+            animation-delay: calc(var(--index) * 0.05s);
+        }
+        
+        @keyframes revealText {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #0A0A0A;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #6E44FF;
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00E5FF;
+        }
+        
+        .btn-neon {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-neon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        .btn-neon:hover::before {
+            left: 100%;
+        }
+        
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="grid-background min-h-screen">
+    <div class="cursor"></div>
+    
+    <!-- Header Section -->
+    <header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/10 border-b border-white/5">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="syncopate text-xl md:text-2xl font-bold tracking-wider glow-text">EHIABHI KINGDOM</a>
+            
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#work" class="nav-link text-white/80 hover:text-white transition-colors">Work</a>
+                <a href="#about" class="nav-link text-white/80 hover:text-white transition-colors">About</a>
+                <a href="#process" class="nav-link text-white/80 hover:text-white transition-colors">Process</a>
+                <a href="#contact" class="nav-link text-white/80 hover:text-white transition-colors">Contact</a>
+            </nav>
+            
+            <button class="md:hidden w-10 h-10 flex items-center justify-center" id="mobileMenuBtn">
+                <i class="ri-menu-line ri-lg"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="fixed inset-0 bg-black/95 z-50 flex flex-col items-center justify-center space-y-8 transform translate-x-full transition-transform duration-300">
+            <button class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center" id="closeMenuBtn">
+                <i class="ri-close-line ri-lg"></i>
+            </button>
+            
+            <a href="#work" class="syncopate text-2xl font-bold tracking-wider">WORK</a>
+            <a href="#about" class="syncopate text-2xl font-bold tracking-wider">ABOUT</a>
+            <a href="#process" class="syncopate text-2xl font-bold tracking-wider">PROCESS</a>
+            <a href="#contact" class="syncopate text-2xl font-bold tracking-wider">CONTACT</a>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center relative overflow-hidden" id="hero">
+        <!-- Floating Shapes -->
+        <div class="floating-shape w-64 h-64 top-1/4 left-1/4" style="animation-duration: 20s;"></div>
+        <div class="floating-shape w-96 h-96 bottom-1/4 right-1/4" style="animation-duration: 25s; animation-delay: 2s;"></div>
+        <div class="floating-shape w-40 h-40 top-1/3 right-1/3" style="animation-duration: 15s; animation-delay: 1s;"></div>
+        
+        <div class="container mx-auto px-6 py-20 relative z-10">
+            <div class="max-w-3xl">
+                <h1 class="syncopate text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-wider leading-tight">
+                    <div class="reveal-text">
+                        <span style="--index: 1;">CREATING</span>
+                    </div>
+                    <div class="reveal-text">
+                        <span style="--index: 2;">FUTURE-FORWARD</span>
+                    </div>
+                    <div class="reveal-text">
+                        <span style="--index: 3;">DIGITAL</span>
+                    </div>
+                    <div class="reveal-text">
+                        <span style="--index: 4;">EXPERIENCES</span>
+                    </div>
+                </h1>
+                
+                <div class="flex flex-wrap gap-4 mb-8 text-white/70">
+                    <div class="animated-text overflow-hidden">
+                        <span class="inline-block" id="roleText">Graphic Designer</span>
+                    </div>
+                    <span class="mx-2">/</span>
+                    <div class="animated-text overflow-hidden">
+                        <span class="inline-block">Motion Designer</span>
+                    </div>
+                    <span class="mx-2">/</span>
+                    <div class="animated-text overflow-hidden">
+                        <span class="inline-block">UI/UX Designer</span>
+                    </div>
+                </div>
+                
+                <p class="text-white/60 text-lg mb-10 max-w-xl">
+                    Crafting immersive digital experiences that blend cutting-edge aesthetics with intuitive functionality. 
+                    My work explores the intersection of visual design, motion, and user experience.
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="#work" class="btn-neon bg-primary hover:bg-primary/90 text-white py-3 px-8 !rounded-button whitespace-nowrap flex items-center gap-2">
+                        View My Work
+                        <i class="ri-arrow-right-line"></i>
+                    </a>
+                    <a href="#contact" class="btn-neon bg-transparent border border-white/20 hover:border-white/40 text-white py-3 px-8 !rounded-button whitespace-nowrap flex items-center gap-2">
+                        Get In Touch
+                        <i class="ri-mail-line"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+            <span class="text-white/50 text-sm mb-2">Scroll Down</span>
+            <div class="w-5 h-10 border border-white/20 !rounded-full flex items-center justify-center">
+                <div class="w-1.5 h-1.5 bg-white !rounded-full animate-bounce"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Portfolio Section -->
+    <section id="work" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
+                <div>
+                    <h2 class="syncopate text-3xl md:text-4xl font-bold mb-4">SELECTED WORK</h2>
+                    <p class="text-white/60 max-w-md">Explore my latest projects across graphic design, motion design, and UI/UX.</p>
+                </div>
+                
+                <div class="flex space-x-6 mt-6 md:mt-0">
+                    <button class="category-filter active text-white/80 hover:text-white pb-1" data-filter="all">All</button>
+                    <button class="category-filter text-white/60 hover:text-white pb-1" data-filter="ui-ux">UI/UX</button>
+                    <button class="category-filter text-white/60 hover:text-white pb-1" data-filter="motion">Motion</button>
+                    <button class="category-filter text-white/60 hover:text-white pb-1" data-filter="graphic">Graphic</button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolioGrid">
+                <!-- Project 1 -->
+                <div class="portfolio-item gradient-border group" data-category="ui-ux">
+                    <div class="relative overflow-hidden !rounded-lg">
+                        <img src="https://readdy.ai/api/search-image?query=futuristic%20mobile%20app%20interface%20design%20with%20dark%20theme%2C%20neon%20blue%20and%20purple%20accents%2C%20clean%20typography%2C%20minimal%20UI%20elements%2C%20high%20contrast%2C%20professional%20UI%2FUX%20design%20mockup%20on%20smartphone%20screen&width=600&height=800&seq=1&orientation=portrait" alt="NeuroSync App" class="w-full h-80 object-cover object-top transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <span class="inline-block px-3 py-1 bg-primary/20 text-primary text-xs !rounded-full mb-3">UI/UX</span>
+                            <h3 class="text-xl font-bold mb-2">NeuroSync App</h3>
+                            <p class="text-white/70 text-sm mb-4">A productivity app with neural interface design system</p>
+                            <a href="#" class="inline-flex items-center text-white gap-2 text-sm font-medium">
+                                View Project <i class="ri-arrow-right-line"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="portfolio-item gradient-border group" data-category="motion">
+                    <div class="relative overflow-hidden !rounded-lg">
+                        <img src="https://readdy.ai/api/search-image?query=futuristic%20motion%20graphics%20design%20with%20abstract%20geometric%20shapes%2C%20vibrant%20neon%20colors%2C%20dynamic%20composition%2C%203D%20elements%2C%20particle%20effects%2C%20professional%20motion%20design%20frame%20from%20animation%20sequence&width=600&height=800&seq=2&orientation=portrait" alt="Quantum Flow" class="w-full h-80 object-cover object-top transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <span class="inline-block px-3 py-1 bg-primary/20 text-primary text-xs !rounded-full mb-3">Motion</span>
+                            <h3 class="text-xl font-bold mb-2">Quantum Flow</h3>
+                            <p class="text-white/70 text-sm mb-4">Abstract motion graphics for tech conference opener</p>
+                            <a href="#" class="inline-flex items-center text-white gap-2 text-sm font-medium">
+                                View Project <i class="ri-arrow-right-line"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="portfolio-item gradient-border group" data-category="graphic">
+                    <div class="relative overflow-hidden !rounded-lg">
+                        <img src="https://readdy.ai/api/search-image?query=futuristic%20graphic%20design%20poster%20with%20cyberpunk%20aesthetic%2C%20neon%20typography%2C%20glitch%20effects%2C%20geometric%20patterns%2C%20high%20contrast%2C%20professional%20graphic%20design%20artwork%20with%20modern%20composition&width=600&height=800&seq=3&orientation=portrait" alt="Neo Tokyo" class="w-full h-80 object-cover object-top transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <span class="inline-block px-3 py-1 bg-primary/20 text-primary text-xs !rounded-full mb-3">Graphic</span>
+                            <h3 class="text-xl font-bold mb-2">Neo Tokyo</h3>
+                            <p class="text-white/70 text-sm mb-4">Cyberpunk-inspired poster series for electronic music festival</p>
+                            <a href="#" class="inline-flex items-center text-white gap-2 text-sm font-medium">
+                                View Project <i class="ri-arrow-right-line"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="portfolio-item gradient-border group" data-category="ui-ux">
+                    <div class="relative overflow-hidden !rounded-lg">
+                        <img src="https://readdy.ai/api/search-image?query=futuristic%20website%20design%20with%20dark%20theme%2C%20interactive%20elements%2C%203D%20components%2C%20gradient%20accents%2C%20clean%20layout%2C%20professional%20UI%2FUX%20design%20for%20technology%20company%20homepage&width=600&height=800&seq=4&orientation=portrait" alt="Horizon Labs" class="w-full h-80 object-cover object-top transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <span class="inline-block px-3 py-1 bg-primary/20 text-primary text-xs !rounded-full mb-3">UI/UX</span>
+                            <h3 class="text-xl font-bold mb-2">Horizon Labs</h3>
+                            <p class="text-white/70 text-sm mb-4">Website redesign for AI research company with 3D elements</p>
+                            <a href="#" class="inline-flex items-center text-white gap-2 text-sm font-medium">
+                                View Project <i class="ri-arrow-right-line"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 5 -->
+                <div class="portfolio-item gradient-border group" data-category="motion">
+                    <div class="relative overflow-hidden !rounded-lg">
+                        <img src="https://readdy.ai/api/search-image?query=futuristic%20character%20animation%20design%20with%20stylized%203D%20character%2C%20dynamic%20pose%2C%20neon%20lighting%2C%20particle%20effects%2C%20clean%20background%2C%20professional%20motion%20design%20frame%20from%20animation%20sequence&width=600&height=800&seq=5&orientation=portrait" alt="Pulse" class="w-full h-80 object-cover object-top transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <span class="inline-block px-3 py-1 bg-primary/20 text-primary text-xs !rounded-full mb-3">Motion</span>
+                            <h3 class="text-xl font-bold mb-2">Pulse</h3>
+                            <p class="text-white/70 text-sm mb-4">Character animation for streaming platform promo</p>
+                            <a href="#" class="inline-flex items-center text-white gap-2 text-sm font-medium">
+                                View Project <i class="ri-arrow-right-line"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 6 -->
+                <div class="portfolio-item gradient-border group" data-category="graphic">
+                    <div class="relative overflow-hidden !rounded-lg">
+                        <img src="https://readdy.ai/api/search-image?query=futuristic%20brand%20identity%20design%20with%20minimalist%20logo%2C%20custom%20typography%2C%20color%20palette%20swatches%2C%20application%20mockups%2C%20clean%20layout%2C%20professional%20graphic%20design%20presentation%20for%20technology%20brand&width=600&height=800&seq=6&orientation=portrait" alt="Vertex" class="w-full h-80 object-cover object-top transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <span class="inline-block px-3 py-1 bg-primary/20 text-primary text-xs !rounded-full mb-3">Graphic</span>
+                            <h3 class="text-xl font-bold mb-2">Vertex</h3>
+                            <p class="text-white/70 text-sm mb-4">Brand identity for tech startup with modular design system</p>
+                            <a href="#" class="inline-flex items-center text-white gap-2 text-sm font-medium">
+                                View Project <i class="ri-arrow-right-line"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-center mt-12">
+                <button class="btn-neon bg-transparent border border-white/20 hover:border-white/40 text-white py-3 px-8 !rounded-button whitespace-nowrap flex items-center gap-2">
+                    Load More Projects
+                    <i class="ri-refresh-line"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <div class="gradient-border overflow-hidden !rounded-lg">
+                        <img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20African%20male%20designer%20in%20creative%20studio%20with%20futuristic%20aesthetic%2C%20stylish%20outfit%2C%20subtle%20lighting%2C%20clean%20background%2C%20looking%20confidently%20at%20camera%2C%20high%20quality%20professional%20headshot&width=600&height=700&seq=7&orientation=portrait" alt="Ehiabhi Kingdom" class="w-full h-auto object-cover object-top">
+                    </div>
+                    
+                    <div class="absolute -bottom-6 -right-6 bg-black p-4 !rounded-lg border border-white/10">
+                        <div class="flex items-center gap-4">
+                            <div class="w-3 h-3 bg-green-500 !rounded-full animate-pulse"></div>
+                            <span class="text-white/70">Available for projects</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h2 class="syncopate text-3xl md:text-4xl font-bold mb-6">ABOUT ME</h2>
+                    
+                    <p class="text-white/70 mb-6">
+                        I'm Ehiabhi Kingdom, a multidisciplinary designer specializing in creating immersive digital experiences that merge aesthetic excellence with functional design. With over 7 years of experience, I've developed a unique approach that combines graphic design principles, motion dynamics, and user-centered design thinking.
+                    </p>
+                    
+                    <p class="text-white/70 mb-8">
+                        My work is driven by a passion for innovation and a commitment to pushing creative boundaries. I believe that great design should not only captivate visually but also enhance user experience and deliver meaningful results for clients.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Education</h3>
+                            <ul class="space-y-3">
+                                <li class="text-white/70">
+                                    <span class="block text-white font-medium">MFA in Digital Arts</span>
+                                    <span class="text-sm">Royal College of Art, 2018</span>
+                                </li>
+                                <li class="text-white/70">
+                                    <span class="block text-white font-medium">BA in Graphic Design</span>
+                                    <span class="text-sm">University of Creative Arts, 2016</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Experience</h3>
+                            <ul class="space-y-3">
+                                <li class="text-white/70">
+                                    <span class="block text-white font-medium">Senior Designer</span>
+                                    <span class="text-sm">Fusion Studios, 2020-Present</span>
+                                </li>
+                                <li class="text-white/70">
+                                    <span class="block text-white font-medium">UI/UX Designer</span>
+                                    <span class="text-sm">Nexus Digital, 2018-2020</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-white/5 !rounded-full text-sm">Graphic Design</span>
+                        <span class="px-4 py-2 bg-white/5 !rounded-full text-sm">Motion Design</span>
+                        <span class="px-4 py-2 bg-white/5 !rounded-full text-sm">UI/UX</span>
+                        <span class="px-4 py-2 bg-white/5 !rounded-full text-sm">3D Modeling</span>
+                        <span class="px-4 py-2 bg-white/5 !rounded-full text-sm">Brand Identity</span>
+                        <span class="px-4 py-2 bg-white/5 !rounded-full text-sm">Typography</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Skills Section -->
+    <section class="py-20 relative bg-black/30">
+        <div class="container mx-auto px-6">
+            <h2 class="syncopate text-3xl md:text-4xl font-bold mb-12 text-center">SKILLS & EXPERTISE</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Design Skills</h3>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>UI/UX Design</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Motion Graphics</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Brand Identity</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Typography</span>
+                                <span>88%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>3D Design</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Software Proficiency</h3>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-white/5 p-6 !rounded-lg">
+                            <div class="w-12 h-12 flex items-center justify-center bg-primary/20 !rounded-full mb-4">
+                                <i class="ri-adobe-fill ri-lg text-primary"></i>
+                            </div>
+                            <h4 class="font-medium mb-1">Adobe Suite</h4>
+                            <div class="flex items-center">
+                                <div class="flex">
+                                    <i class="ri-star-fill text-primary"></i>
+                                    <i class="ri-star-fill text-primary"></i>
+                                    <i class="ri-star-fill text-primary"></i>
+                                    <i class="ri-star-fill text-primary"></i>
+                                    <i class="ri-star-fill text-primary"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white/5 p-6 !rounded-lg">
+                            <div class="w-12 h-12 flex items-center justify-center bg-primary/20 !rounded-full mb-4">
+                                <i class="ri-figma-fill ri-lg text-primary"></i>
+                            </div>
+                            <h4 class="font-medium mb-1">Figma</h4>
+                            <div class="flex items-center">
+                                <div class="flex">
+                                    <i class="ri-star-fill text-primary"></i>
+                                    <i class="ri-star-fill text-primary"></i>
+                                    <i class="ri-star-fill text-primary"></i>
+                                    <i class="ri-star-fill text-primary"></i>
+                                    <i class="ri-star-fill text-primary"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white/5 p-6 !rounded-lg">
+                            <div class="w-12 h-12 flex items-center justify-center bg-primary/20 !rounded-full mb-4">
+                                <i class="ri-blender-fill ri-lg text-primary"></i>
+                            </div>
+                            <h4 class="font-medium mb-1">Cinema 4D</h4>
+                            <div class="flex items-center">
+                                <div class="flex">
+                                    <i class="ri-star-fill text-primary"></i>
+                                    <i class="ri-star-fill text-primary"></i>
+                                    <i class="ri-star-fill text-primary"></i>
+                                    <i class="ri-star-fill text-primary"></i>
+                                    <i class="ri-star-line text-primary"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white/5 p-6 !rounded-lg">
+                            <div class="w-12 h-12 flex items-center justify-center bg-primary/20 !rounded-full mb-4">
+                                <i class="ri-code-s-slash-line ri-lg text-primary"></i>
+                            </div>
+                            <h4 class="font-medium mb-1">HTML/CSS</h4>
+                            <div class="flex items-center">
+                                <div class="flex">
+                                    <i class="ri-star-fill text-primary"></i>
+                                    <i class="ri-star-fill text-primary"></i>
+                                    <i class="ri-star-fill text-primary"></i>
+                                    <i class="ri-star-fill text-primary"></i>
+                                    <i class="ri-star-line text-primary"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Process Section -->
+    <section id="process" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <h2 class="syncopate text-3xl md:text-4xl font-bold mb-6">MY PROCESS</h2>
+            <p class="text-white/70 max-w-2xl mb-12">My design approach is methodical yet flexible, allowing for creative exploration while ensuring project goals are met efficiently.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Step 1 -->
+                <div class="bg-white/5 p-8 !rounded-lg border border-white/10 hover:border-primary/30 transition-colors group">
+                    <div class="w-16 h-16 flex items-center justify-center bg-primary/20 !rounded-full mb-6 group-hover:bg-primary/30 transition-colors">
+                        <span class="text-2xl font-bold text-primary">01</span>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold mb-4">Discovery</h3>
+                    <p class="text-white/70 mb-6">Understanding client needs, researching the market, and defining project goals and constraints.</p>
+                    
+                    <ul class="space-y-2 text-white/60 text-sm">
+                        <li class="flex items-start gap-2">
+                            <i class="ri-checkbox-circle-line text-primary mt-1"></i>
+                            <span>Client consultation</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="ri-checkbox-circle-line text-primary mt-1"></i>
+                            <span>Market research</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="ri-checkbox-circle-line text-primary mt-1"></i>
+                            <span>Competitive analysis</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="bg-white/5 p-8 !rounded-lg border border-white/10 hover:border-primary/30 transition-colors group">
+                    <div class="w-16 h-16 flex items-center justify-center bg-primary/20 !rounded-full mb-6 group-hover:bg-primary/30 transition-colors">
+                        <span class="text-2xl font-bold text-primary">02</span>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold mb-4">Ideation</h3>
+                    <p class="text-white/70 mb-6">Generating concepts, sketching ideas, and exploring different creative directions.</p>
+                    
+                    <ul class="space-y-2 text-white/60 text-sm">
+                        <li class="flex items-start gap-2">
+                            <i class="ri-checkbox-circle-line text-primary mt-1"></i>
+                            <span>Concept development</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="ri-checkbox-circle-line text-primary mt-1"></i>
+                            <span>Mood boarding</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="ri-checkbox-circle-line text-primary mt-1"></i>
+                            <span>Sketching & wireframing</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="bg-white/5 p-8 !rounded-lg border border-white/10 hover:border-primary/30 transition-colors group">
+                    <div class="w-16 h-16 flex items-center justify-center bg-primary/20 !rounded-full mb-6 group-hover:bg-primary/30 transition-colors">
+                        <span class="text-2xl font-bold text-primary">03</span>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold mb-4">Creation</h3>
+                    <p class="text-white/70 mb-6">Developing the chosen concept into a fully realized design with attention to detail.</p>
+                    
+                    <ul class="space-y-2 text-white/60 text-sm">
+                        <li class="flex items-start gap-2">
+                            <i class="ri-checkbox-circle-line text-primary mt-1"></i>
+                            <span>Visual design</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="ri-checkbox-circle-line text-primary mt-1"></i>
+                            <span>Prototyping</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="ri-checkbox-circle-line text-primary mt-1"></i>
+                            <span>Animation & motion</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="bg-white/5 p-8 !rounded-lg border border-white/10 hover:border-primary/30 transition-colors group">
+                    <div class="w-16 h-16 flex items-center justify-center bg-primary/20 !rounded-full mb-6 group-hover:bg-primary/30 transition-colors">
+                        <span class="text-2xl font-bold text-primary">04</span>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold mb-4">Refinement</h3>
+                    <p class="text-white/70 mb-6">Testing, gathering feedback, and iterating to perfect the final deliverable.</p>
+                    
+                    <ul class="space-y-2 text-white/60 text-sm">
+                        <li class="flex items-start gap-2">
+                            <i class="ri-checkbox-circle-line text-primary mt-1"></i>
+                            <span>User testing</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="ri-checkbox-circle-line text-primary mt-1"></i>
+                            <span>Client feedback</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="ri-checkbox-circle-line text-primary mt-1"></i>
+                            <span>Final delivery</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="py-20 relative bg-black/30">
+        <div class="container mx-auto px-6">
+            <h2 class="syncopate text-3xl md:text-4xl font-bold mb-12 text-center">CLIENT FEEDBACK</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Testimonial 1 -->
+                <div class="bg-white/5 p-8 !rounded-lg border border-white/10">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 !rounded-full overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20business%20woman%20with%20short%20dark%20hair%2C%20neutral%20expression%2C%20clean%20background%2C%20corporate%20portrait&width=100&height=100&seq=8&orientation=squarish" alt="Sarah Chen" class="w-full h-full object-cover object-top">
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-medium">Sarah Chen</h4>
+                            <p class="text-white/60 text-sm">CEO, Nexus Digital</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-white/70 mb-6">
+                        "Ehiabhi's work on our brand redesign was exceptional. His ability to translate our vision into a cohesive visual identity exceeded our expectations. The motion graphics he created for our product launch received overwhelmingly positive feedback."
+                    </p>
+                    
+                    <div class="flex">
+                        <i class="ri-star-fill text-primary"></i>
+                        <i class="ri-star-fill text-primary"></i>
+                        <i class="ri-star-fill text-primary"></i>
+                        <i class="ri-star-fill text-primary"></i>
+                        <i class="ri-star-fill text-primary"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white/5 p-8 !rounded-lg border border-white/10">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 !rounded-full overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20business%20man%20with%20glasses%2C%20short%20beard%2C%20neutral%20expression%2C%20clean%20background%2C%20corporate%20portrait&width=100&height=100&seq=9&orientation=squarish" alt="Marcus Johnson" class="w-full h-full object-cover object-top">
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-medium">Marcus Johnson</h4>
+                            <p class="text-white/60 text-sm">Product Lead, Horizon Labs</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-white/70 mb-6">
+                        "Working with Ehiabhi on our app redesign was a game-changer. His UI/UX expertise helped us simplify complex workflows while creating a visually stunning interface. User engagement increased by 40% after launch."
+                    </p>
+                    
+                    <div class="flex">
+                        <i class="ri-star-fill text-primary"></i>
+                        <i class="ri-star-fill text-primary"></i>
+                        <i class="ri-star-fill text-primary"></i>
+                        <i class="ri-star-fill text-primary"></i>
+                        <i class="ri-star-fill text-primary"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white/5 p-8 !rounded-lg border border-white/10">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 !rounded-full overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20business%20woman%20with%20long%20blonde%20hair%2C%20neutral%20expression%2C%20clean%20background%2C%20corporate%20portrait&width=100&height=100&seq=10&orientation=squarish" alt="Olivia Martinez" class="w-full h-full object-cover object-top">
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-medium">Olivia Martinez</h4>
+                            <p class="text-white/60 text-sm">Marketing Director, Pulse Media</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-white/70 mb-6">
+                        "Ehiabhi created a stunning motion graphics package for our annual conference that perfectly captured our brand essence. His attention to detail and creative vision transformed our presentation materials."
+                    </p>
+                    
+                    <div class="flex">
+                        <i class="ri-star-fill text-primary"></i>
+                        <i class="ri-star-fill text-primary"></i>
+                        <i class="ri-star-fill text-primary"></i>
+                        <i class="ri-star-fill text-primary"></i>
+                        <i class="ri-star-half-fill text-primary"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="syncopate text-3xl md:text-4xl font-bold mb-6">GET IN TOUCH</h2>
+                    <p class="text-white/70 mb-8 max-w-md">
+                        Interested in working together? Let's discuss your project and explore how we can create something amazing.
+                    </p>
+                    
+                    <div class="space-y-6 mb-8">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 flex items-center justify-center bg-primary/20 !rounded-full shrink-0">
+                                <i class="ri-mail-line text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium mb-1">Email</h4>
+                                <a href="mailto:hello@ehiabhikingdom.com" class="text-white/70 hover:text-primary transition-colors">hello@ehiabhikingdom.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 flex items-center justify-center bg-primary/20 !rounded-full shrink-0">
+                                <i class="ri-map-pin-line text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium mb-1">Location</h4>
+                                <p class="text-white/70">London, United Kingdom</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 flex items-center justify-center bg-primary/20 !rounded-full shrink-0">
+                                <i class="ri-time-line text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium mb-1">Availability</h4>
+                                <p class="text-white/70">Currently available for freelance projects</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-medium mb-4">Connect with me</h4>
+                        <div class="flex gap-4">
+                            <a href="#" class="w-10 h-10 flex items-center justify-center bg-white/5 !rounded-full hover:bg-primary/20 transition-colors group">
+                                <i class="ri-behance-fill text-white/70 group-hover:text-primary transition-colors"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 flex items-center justify-center bg-white/5 !rounded-full hover:bg-primary/20 transition-colors group">
+                                <i class="ri-dribbble-fill text-white/70 group-hover:text-primary transition-colors"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 flex items-center justify-center bg-white/5 !rounded-full hover:bg-primary/20 transition-colors group">
+                                <i class="ri-instagram-fill text-white/70 group-hover:text-primary transition-colors"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 flex items-center justify-center bg-white/5 !rounded-full hover:bg-primary/20 transition-colors group">
+                                <i class="ri-linkedin-fill text-white/70 group-hover:text-primary transition-colors"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <form class="bg-white/5 p-8 !rounded-lg border border-white/10">
+                        <h3 class="text-xl font-bold mb-6">Send me a message</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="name" class="block text-white/70 mb-2 text-sm">Name</label>
+                                <input type="text" id="name" class="neon-input w-full bg-black/50 border-none !rounded-lg p-3 text-white focus:outline-none" placeholder="Your name">
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-white/70 mb-2 text-sm">Email</label>
+                                <input type="email" id="email" class="neon-input w-full bg-black/50 border-none !rounded-lg p-3 text-white focus:outline-none" placeholder="Your email">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="subject" class="block text-white/70 mb-2 text-sm">Subject</label>
+                            <input type="text" id="subject" class="neon-input w-full bg-black/50 border-none !rounded-lg p-3 text-white focus:outline-none" placeholder="Project inquiry">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-white/70 mb-2 text-sm">Message</label>
+                            <textarea id="message" rows="5" class="neon-input w-full bg-black/50 border-none !rounded-lg p-3 text-white focus:outline-none resize-none" placeholder="Tell me about your project..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-neon bg-primary hover:bg-primary/90 text-white py-3 px-8 w-full !rounded-button whitespace-nowrap flex items-center justify-center gap-2">
+                            Send Message
+                            <i class="ri-send-plane-fill"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/10">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="#" class="syncopate text-xl font-bold tracking-wider">EHIABHI KINGDOM</a>
+                    <p class="text-white/50 text-sm mt-2">© 2025 All Rights Reserved</p>
+                </div>
+                
+                <div class="flex flex-wrap gap-6 justify-center">
+                    <a href="#" class="text-white/70 hover:text-white transition-colors">Work</a>
+                    <a href="#" class="text-white/70 hover:text-white transition-colors">About</a>
+                    <a href="#" class="text-white/70 hover:text-white transition-colors">Process</a>
+                    <a href="#" class="text-white/70 hover:text-white transition-colors">Contact</a>
+                </div>
+                
+                <div class="mt-6 md:mt-0">
+                    <button id="backToTop" class="w-10 h-10 flex items-center justify-center bg-primary/20 !rounded-full hover:bg-primary/30 transition-colors">
+                        <i class="ri-arrow-up-line text-primary"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script id="cursorEffects">
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create cursor elements
+            const cursor = document.querySelector('.cursor');
+            const trailsContainer = document.createElement('div');
+            document.body.appendChild(trailsContainer);
+            
+            // Create trails
+            const numTrails = 10;
+            const trails = [];
+            
+            for (let i = 0; i < numTrails; i++) {
+                const trail = document.createElement('div');
+                trail.classList.add('cursor-trail');
+                trail.style.opacity = 1 - (i / numTrails);
+                trailsContainer.appendChild(trail);
+                trails.push({
+                    element: trail,
+                    x: 0,
+                    y: 0
+                });
+            }
+            
+            // Mouse movement handler
+            let mouseX = 0;
+            let mouseY = 0;
+            
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                
+                // Update main cursor
+                cursor.style.left = mouseX + 'px';
+                cursor.style.top = mouseY + 'px';
+            });
+            
+            // Handle cursor over interactive elements
+            const interactiveElements = document.querySelectorAll('a, button, input, textarea, .portfolio-item');
+            
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.width = '40px';
+                    cursor.style.height = '40px';
+                    cursor.style.backgroundColor = 'rgba(110, 68, 255, 0.2)';
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.width = '20px';
+                    cursor.style.height = '20px';
+                    cursor.style.backgroundColor = 'transparent';
+                });
+            });
+            
+            // Animation loop for trails
+            function updateTrails() {
+                // Shift positions
+                for (let i = trails.length - 1; i > 0; i--) {
+                    trails[i].x = trails[i-1].x;
+                    trails[i].y = trails[i-1].y;
+                }
+                
+                // Update first trail to current mouse position
+                if (trails.length > 0) {
+                    trails[0].x = mouseX;
+                    trails[0].y = mouseY;
+                }
+                
+                // Update trail elements
+                trails.forEach(trail => {
+                    trail.element.style.left = trail.x + 'px';
+                    trail.element.style.top = trail.y + 'px';
+                });
+                
+                requestAnimationFrame(updateTrails);
+            }
+            
+            updateTrails();
+        });
+    </script>
+    
+    <script id="mobileMenuHandler">
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const closeMenuBtn = document.getElementById('closeMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('translate-x-full');
+                mobileMenu.classList.add('translate-x-0');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            closeMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('translate-x-0');
+                mobileMenu.classList.add('translate-x-full');
+                document.body.style.overflow = '';
+            });
+            
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('translate-x-0');
+                    mobileMenu.classList.add('translate-x-full');
+                    document.body.style.overflow = '';
+                });
+            });
+        });
+    </script>
+    
+    <script id="portfolioFilter">
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.category-filter');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    const filter = button.getAttribute('data-filter');
+                    
+                    // Filter items
+                    portfolioItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    
+    <script id="scrollEffects">
+        document.addEventListener('DOMContentLoaded', function() {
+            // Back to top button
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Smooth scroll for navigation links
+            const navLinks = document.querySelectorAll('a[href^="#"]');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const targetId = link.getAttribute('href');
+                    
+                    if (targetId !== '#') {
+                        e.preventDefault();
+                        
+                        const targetElement = document.querySelector(targetId);
+                        
+                        if (targetElement) {
+                            const offsetTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                            
+                            window.scrollTo({
+                                top: offsetTop,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // Animated text role switcher
+            const roleText = document.getElementById('roleText');
+            const roles = ['Graphic Designer', 'Motion Designer', 'UI/UX Designer'];
+            let currentRoleIndex = 0;
+            
+            function switchRole() {
+                roleText.style.opacity = '0';
+                
+                setTimeout(() => {
+                    currentRoleIndex = (currentRoleIndex + 1) % roles.length;
+                    roleText.textContent = roles[currentRoleIndex];
+                    roleText.style.opacity = '1';
+                }, 500);
+            }
+            
+            // Initial delay before starting the animation
+            setTimeout(() => {
+                setInterval(switchRole, 3000);
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
